@@ -1,0 +1,2 @@
+k_Ideg	k_Igen	k_Pdeg	k_Pinh	k_Sdeg	k_Sinp	k_cat	k_ei	k_es	k_rei	k_res	RSS
+417228	22483.9	1e-06	2643.62	39.0033	214887	382608	41466.6	1e-06	2415.63	53572	0.032876499999999996

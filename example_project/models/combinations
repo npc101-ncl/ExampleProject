@@ -1,0 +1,108 @@
+# imports
+from antimony_combinations import Combinations, ExtensionHypothesis
+# Not needed to actually build the model set but we
+#  might as well import tellurium and pycotools since we'll probably
+#  want to use them for working with the model set.
+import telluirum as te
+
+class MyCombModel(Combinations):
+
+    # no __init__ is necessary as we use the __init__ from parent class
+
+    def core__functions(self):
+        return ''' '''
+
+    def core__variables(self):
+        return '''
+        compartment Cell;
+        var A in Cell;
+        var pA in Cell;
+        var B in Cell;
+        var pB in Cell;
+        var C in Cell;
+        var pC in Cell;
+
+        const S in Cell
+        '''
+
+    def core__reactions(self):
+        return '''
+        R1f: A -> pA; k1f*A*S;
+        R2f: B -> pB; k2f*B*A;
+        R3f: C -> pC; k3f*C*B;
+        '''
+
+    def core__parameters(self):
+        return '''
+        k1f    = 0.1;
+        k2f    = 0.1;
+        k3f    = 0.1;
+
+        k2b    = 0.1;
+        k3b    = 0.1;
+        VmaxB  = 0.1;
+        kmB    = 0.1;
+        VmaxA  = 0.1;
+        kmA    = 0.1;
+        k4     = 0.1;
+
+        S = 1;
+        A = 10;
+        pA = 0;
+        B = 10;
+        pB = 0;
+        C = 10;
+        pC = 0;
+        Cell = 1;
+        '''
+
+    def core__units(self):
+        return None  # Not needed for now
+
+    def core__events(self):
+        return None  # No events needed
+
+    def extension_hypothesis__additive1(self):
+        return HypothesisExtension(
+            name='AdditiveReaction1',
+            reaction='pB -> B',
+            rate_law='k2b * pB',
+            mode='additive',
+            to_replace=None,  # not needed for additive mode
+        )
+
+    def extension_hypothesis__additive2(self):
+        return HypothesisExtension(
+            name='AdditiveReaction2',
+            reaction='pC -> C',
+            rate_law='k3b * C',
+            mode='additive',
+            to_replace=None,  # not needed for additive mode
+        )
+
+    def extension_hypothesis__replace_reaction(self):
+        return HypothesisExtension(
+            name='ReplaceReaction',
+            reaction='pB -> B',
+            rate_law='VmaxB * pB / (kmB + pB)',
+            mode='replace',
+            to_replace='R2f',  # name of reaction we want to replace
+        )
+
+    def extension_hypothesis__feedback1(self):
+        return HypothesisExtension(
+            name='Feedback1',
+            reaction='pA -> A',
+            rate_law='VmaxA * pA / (kmA + pA)',
+            mode='additive',
+            to_replace=None,  # name of reaction we want to replace
+        )
+
+    def extension_hypothesis__feedback2(self):
+        return HypothesisExtension(
+            name='Feedback2',
+            reaction='pA -> A',
+            rate_law='k4 * pA',  # mass action variant
+            mode='additive',
+            to_replace=None,  # name of reaction we want to replace
+        )

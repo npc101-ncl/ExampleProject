@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by libAntimony version v2.11.0 with libSBML version 5.18.0. -->
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model metaid="exercise" id="exercise">
+    <listOfCompartments>
+      <compartment id="cytoplasm" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="_N" compartment="cytoplasm" initialConcentration="36" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="_G" compartment="cytoplasm" initialConcentration="10" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="_D" compartment="cytoplasm" initialConcentration="10" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="_K" compartment="cytoplasm" initialConcentration="48" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Np" compartment="cytoplasm" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Gp" compartment="cytoplasm" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Dp" compartment="cytoplasm" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Kp" compartment="cytoplasm" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="_k_Np" value="0.1" constant="true"/>
+      <parameter id="S" value="0" constant="true"/>
+      <parameter id="_k_Nd" value="0.1" constant="true"/>
+      <parameter id="_k_Gp" value="0.1" constant="true"/>
+      <parameter id="_k_Gd" value="0.1" constant="true"/>
+      <parameter id="I1" value="0" constant="true"/>
+      <parameter id="_k_Dp" value="0.1" constant="true"/>
+      <parameter id="_k_Dd" value="0.1" constant="true"/>
+      <parameter id="I2" value="0" constant="true"/>
+      <parameter id="_k_KpN" value="0.1" constant="true"/>
+      <parameter id="_k_KpG" value="0.1" constant="true"/>
+      <parameter id="_k_Kd" value="0.1" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="RpN" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="_N" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Np" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Np </ci>
+              <ci> _N </ci>
+              <ci> S </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RdN" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Np" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="_N" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Dp"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Nd </ci>
+              <ci> Np </ci>
+              <ci> Dp </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RpG" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="_G" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Np"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Gp </ci>
+              <ci> _G </ci>
+              <ci> Np </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RdG" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Gp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="_G" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Gd </ci>
+              <ci> Gp </ci>
+              <ci> I1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RpD" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="_D" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Dp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Gp"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Dp </ci>
+              <ci> _D </ci>
+              <ci> Gp </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RdD" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Dp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="_D" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Dd </ci>
+              <ci> Dp </ci>
+              <ci> I2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RpK" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="_K" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Kp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Np"/>
+          <modifierSpeciesReference species="Gp"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <ci> _k_KpN </ci>
+                  <ci> Np </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> _k_KpG </ci>
+                  <ci> Gp </ci>
+                </apply>
+              </apply>
+              <ci> _K </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RdK" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Kp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="_K" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> _k_Kd </ci>
+              <ci> Kp </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

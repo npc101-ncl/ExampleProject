@@ -1,0 +1,2 @@
+k_Ideg	k_Igen	k_Pdeg	k_Pinh	k_Sdeg	k_Sinp	k_cat	k_ei	k_es	k_rei	k_res	RSS
+1e-06	1000000.0	103211	26518.3	1e-06	101987	103244	998.2810000000001	439412	37911.1	15671.2	0.0100046
